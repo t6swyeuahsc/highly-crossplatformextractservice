@@ -1,11 +1,35 @@
-function isValidBST(root) {
-  return isValid(root, null, null);
-  function isValid(node, min, max) {
-    if (!node) return true;
-    if ((min !== null && node.val <= min) || (max !== null && node.val >= max))
-      return false;
-    return (
-      isValid(node.left, min, node.val) && isValid(node.right, node.val, max)
-    );
+const cycleSort = (arr) => {
+  for (let start = 0; start < arr.length - 1; start++) {
+    let item = arr[start];
+    let pos = start;
+    for (let i = start + 1; i < arr.length; i++) {
+      if (arr[i] < item) {
+        pos++;
+      }
+    }
+    if (pos === start) {
+      continue;
+    }
+    while (item === arr[pos]) {
+      pos++;
+    }
+    if (pos !== start) {
+      [item, arr[pos]] = [arr[pos], item];
+    }
+    while (pos !== start) {
+      pos = start;
+      for (let i = start + 1; i < arr.length; i++) {
+        if (arr[i] < item) {
+          pos++;
+        }
+      }
+      while (item === arr[pos]) {
+        pos++;
+      }
+      if (item !== arr[pos]) {
+        [item, arr[pos]] = [arr[pos], item];
+      }
+    }
   }
-}
+  return arr;
+};
