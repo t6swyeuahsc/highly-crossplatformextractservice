@@ -1,3 +1,5 @@
-const numbers = [1, 5, 2, 8];
-const max = Math.max(...numbers);
-console.log(max); // 8
+function kthSmallest(matrix, k) {
+  const flatten = matrix.reduce((acc, row) => acc.concat(row), []);
+  flatten.sort((a, b) => a - b);
+  return flatten[k - 1];
+}
